@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Nature: Project Proposal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap');
+
+        :root {
+            --ng-yellow: #3fa66e;
+            --deep-black: #1a5c3d;
+            --dark-grey: #2C2C2C;
+            --slate: #4A4A4A;
+            --pure-white: #FFFFFF;
+            --accent-green: #2D8659;
+            --code-bg: #f6f8fa;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0e0e0;
+            color: var(--deep-black);
+            padding: 40px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .slide {
+            background: var(--pure-white);
+            width: 100%;
+            min-height: 600px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            page-break-after: always;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--ng-yellow) 0%, var(--accent-green) 100%);
+        }
+
+        h1 { font-family: 'Merriweather', serif; font-size: clamp(32px, 5vw, 42px); margin-bottom: 10px; font-weight: 700; }
+        h2 { font-family: 'Merriweather', serif; font-size: clamp(24px, 4vw, 32px); color: var(--dark-grey); margin-bottom: 25px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; }
+        h3 { font-size: clamp(16px, 2.5vw, 18px); text-transform: uppercase; letter-spacing: 1px; color: var(--accent-green); margin-bottom: 10px; margin-top: 15px; }
+        p { font-size: clamp(14px, 2vw, 16px); line-height: 1.6; color: var(--slate); margin-bottom: 15px; }
+
+        .col-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .col-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-left: 4px solid var(--accent-green);
+            border-radius: 0 4px 4px 0;
+            height: 100%;
+        }
+
+        .metric-box {
+            background: var(--deep-black);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .metric-val { font-size: clamp(28px, 4vw, 32px); font-weight: 700; color: var(--ng-yellow); display: block; }
+        .metric-desc { font-size: clamp(12px, 2vw, 14px); opacity: 0.9; }
+
+        .link-card {
+            display: block;
+            background: var(--code-bg);
+            border: 1px solid #d0d7de;
+            padding: 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #2D8659;
+            font-family: monospace;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+        .link-card:hover { background: #eef1f4; }
+        .repo-icon { display: inline-block; width: 16px; height: 16px; margin-right: 8px; vertical-align: middle; fill: var(--deep-black); }
+
+        .slide-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .highlight { font-weight: 500; color: var(--deep-black); }
+
+        .timeline-container {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--ng-yellow) 0%, var(--accent-green) 100%);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            border-left: none;
+            border-right: 4px solid var(--ng-yellow);
+        }
+
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-green);
+            border: 4px solid white;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            background: var(--ng-yellow);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent-green);
+            font-size: clamp(12px, 2vw, 14px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            color: #2D8659;
+        }
+
+        .timeline-title {
+            font-size: clamp(16px, 2.5vw, 18px);
+            font-weight: 600;
+            color: var(--deep-black);
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            font-size: clamp(13px, 2vw, 14px);
+            line-height: 1.5;
+            color: var(--slate);
+        }
+
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .budget-item:last-child {
+            border-bottom: none;
+        }
+
+        .budget-label {
+            font-size: clamp(13px, 2vw, 15px);
+            color: var(--slate);
+        }
+
+        .budget-amount {
+            font-weight: 600;
+            color: var(--deep-black);
+        }
+
+        .budget-total {
+            background: var(--deep-black);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .budget-total-amount {
+            font-size: clamp(28px, 4vw, 36px);
+            font-weight: 700;
+            color: var(--ng-yellow);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .budget-total-label {
+            font-size: clamp(12px, 2vw, 14px);
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .slide {
+                padding: 40px 20px;
+                min-height: auto;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+
+            .timeline-content {
+                width: calc(100% - 50px);
+                margin-left: 50px;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .col-2,
+            .col-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .slide {
+                padding: 30px 15px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .slide {
+                box-shadow: none;
+                margin-bottom: 0;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="slide">
+        <div style="text-align: center; margin-top: 80px;">
+            <h1 style="color: var(--accent-green);">Discover Nature</h1>
+            <p style="font-size: clamp(18px, 3vw, 24px); font-weight: 300; color: var(--dark-grey);">From Digital Distraction to Ecological Discovery</p>
+            
+            <div style="margin-top: 40px; display: inline-block; border: 1px solid var(--deep-black); padding: 10px 25px; border-radius: 30px;">
+                Level I Grant Proposal
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 1</span>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Project Summary</h2>
+        <div class="col-2">
+            <div>
+                <p class="highlight">My project addresses the growing disconnect between a digital-native generation and the natural world by transforming smartphones from distractions into tools for ecological discovery.</p>
+                <p>I am developing a mobile app that combines daily science education with real-time local exploration, allowing users to discover and identify the specific wildlife living right in their own neighborhoods.</p>
+            </div>
+            <div class="card">
+                <h3>The Core Philosophy</h3>
+                <p>This project makes biodiversity education accessible and exciting by mixing <strong>gamified learning</strong> with <strong>hard science</strong>.</p>
+                <p>The ultimate goal is helping anyone to understand and ultimately protect the ecosystems they encounter every day.</p>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 2</span>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>The Issue & Urgency</h2>
+        <p>The next generation spends increasing amounts of time on mobile devices. We miss a critical opportunity if we view this technology solely as a distraction rather than a tool for exploration.</p>
+        
+        <div class="col-2">
+            <div class="card" style="border-left-color: var(--ng-yellow);">
+                <h3>The Accessibility Gap</h3>
+                <p>Despite the hype around new technologies and vast environmental datasets, a significant accessibility gap remains.</p>
+                <p>For the general public, interpreting this data often feels like it requires <strong>advanced biological training</strong>.</p>
+                <p><em>Consequence: Many people simply give up.</em></p>
+            </div>
+            <div>
+                <h3>Differentiation</h3>
+                <p><strong>Existing Solutions:</strong></p>
+                <ul>
+                    <li>Apps like <em>iNaturalist</em> focus heavily on data collection.</li>
+                    <li>Other apps focus purely on gamification.</li>
+                </ul>
+                <p style="margin-top: 20px;"><strong>My Proposal:</strong></p>
+                <p>Discover Nature combines these into a <strong>single ecosystem</strong>.</p>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 3</span>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Objectives & Signs of Success</h2>
+        <p>The primary objective is to have a new generation equipped with knowledge, connection, and agency to protect biodiversity because this will push them to develop environmental literacy.</p>
+        
+        <h3>Success Metrics</h3>
+        <div class="col-3">
+            <div class="metric-box">
+                <span class="metric-val">80%+</span>
+                <span class="metric-desc">Feedback that app made nature feel understandable</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-val">Growth</span>
+                <span class="metric-desc">Increased interest in observing local nature</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-val">50%+</span>
+                <span class="metric-desc">Long-term users report taking environmental action</span>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 4</span>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Technical Feasibility</h2>
+        <p>This plan is highly likely to succeed because it is not starting from zero. I already have a small MVP which I am currently working on.</p>
+        
+        <div class="col-2">
+            <div class="card">
+                <h3>De-Risking the Timeline</h3>
+                <p>Having a functional codebase significantly de-risks the technical timeline.</p>
+                <p>This allows the majority of the grant period to focus on refinement and the critical <strong>"educational evaluation"</strong> that National Geographic prioritizes.</p>
+            </div>
+            <div>
+                <h3>Current Codebase (MVP)</h3>
+                <a href="https://github.com/mravaloarison/nat-geo-ios-mvp" class="link-card" target="_blank">
+                    <strong>📱 iOS Repository</strong><br>
+                    github.com/mravaloarison/nat-geo-ios-mvp
+                </a>
+                <a href="https://github.com/mravaloarison/nat-geo-api-mvp" class="link-card" target="_blank">
+                    <strong>🐍 Python API Repository</strong><br>
+                    github.com/mravaloarison/nat-geo-api-mvp
+                </a>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 5</span>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Implementation Plan: Beta Phase</h2>
+        <p>The goal is to validate that the app effectively engages the target audience and gather preliminary data on learning outcomes before public launch.</p>
+        
+        <div class="col-3">
+            <div class="card">
+                <h3>1. Closed Cohort</h3>
+                <p>Launch a closed beta with a defined cohort of <strong>100-200 learners</strong>.</p>
+                <p><em>Aligns with requirement to have an "identified group of learners".</em></p>
+            </div>
+            <div class="card">
+                <h3>2. Calibration</h3>
+                <p>Fix bugs and <strong>calibrate the difficulty</strong> of AI-generated quizzes based on actual user performance data.</p>
+            </div>
+            <div class="card">
+                <h3>3. Analytics</h3>
+                <p>Utilize <strong>A/B testing</strong> on the "Home View" to optimize news engagement.</p>
+                <p>Track conversion from "Learning" (reading) to "Doing" (opening Map View).</p>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 6</span>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Innovation & Risk Assessment</h2>
+        
+        <div class="col-2">
+            <div>
+                <h3>Why This is Novel</h3>
+                <p>My approach diverges from standard educational apps by leveraging <strong>Generative AI for personalization</strong>, not just content creation.</p>
+                <p>While standard EdTech relies on static libraries, I use AI to dynamically generate learning pathways based on real-time data. This ensures content is <strong>never stale</strong> and is <strong>locally relevant</strong>.</p>
+            </div>
+            <div class="card" style="border-left-color: #d9534f;">
+                <h3>Identified Risks</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li style="padding-bottom: 10px;"><strong>API Dependencies:</strong> iNaturalist, GBIF, NewsAPI, or Gemini experiencing downtime or term changes.</li>
+                    <li style="padding-bottom: 10px;"><strong>AI Accuracy:</strong> Ensuring educational integrity and preventing hallucinations.</li>
+                    <li style="padding-bottom: 10px;"><strong>Engagement Trap:</strong> Avoiding the "Awareness Trap" where users consume content but don't take action.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 7</span>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>Budget & Timeline</h2>
+
+        <h3>Project Timeline</h3>
+        <p>Development began on <strong>October 27, 2025</strong>. The first public-ready MVP is scheduled to launch on <strong>April 30, 2026</strong>. This timeline includes refinement of the current 60%-complete MVP, testing with a closed cohort, and educational evaluation.</p>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Oct – Dec 2025</div>
+                    <div class="timeline-title">Foundation & Core Development</div>
+                    <div class="timeline-description">Finalize core MVP features (identification, fun facts, quiz engine). Begin early user testing and stability improvements.</div>
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Jan – Feb 2026</div>
+                    <div class="timeline-title">Refinement & Integration</div>
+                    <div class="timeline-description">Refine UX, integrate analytics, strengthen educational accuracy, and calibrate AI models.</div>
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Mar – Apr 2026</div>
+                    <div class="timeline-title">Beta Testing & Launch Prep</div>
+                    <div class="timeline-description">Closed beta with 100–200 learners. Fix bugs, refine AI, complete evaluation, and finalize MVP for launch.</div>
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">Budget Breakdown</h3>
+        <div class="budget-grid">
+            <div class="card">
+                <h3>Direct Development Costs</h3>
+                <div style="margin-top: 15px;">
+                    <div class="budget-item">
+                        <span class="budget-label">Apple Developer Program</span>
+                        <span class="budget-amount">$99</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Gemini API (6 months × $35 avg)</span>
+                        <span class="budget-amount">$210</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Firebase (6 months × $40 avg)</span>
+                        <span class="budget-amount">$240</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Backend Hosting (6 months × $15 avg)</span>
+                        <span class="budget-amount">$90</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Devices to test</span>
+                        <span class="budget-amount">$700</span>
+                    </div>
+                </div>
+            </div>
+            <div class="budget-total">
+                <span class="budget-total-amount">$1,400 – $1,500</span>
+                <span class="budget-total-label">Estimated Total for MVP Development</span>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 8</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
