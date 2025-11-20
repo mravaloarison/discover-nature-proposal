@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discover Nature: Project Proposal</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap');
 
@@ -24,6 +25,14 @@
             background-color: #e0e0e0;
             color: var(--deep-black);
             padding: 40px;
+        }
+
+        .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
         }
 
         .container { max-width: 1100px; margin: 0 auto; }
@@ -255,6 +264,16 @@
             opacity: 0.9;
         }
 
+        .card h3 {
+            display: flex;
+            align-items: center;      
+            gap: 8px;                 
+        }
+
+        .card h3 .material-symbols-outlined {
+            font-size: 28px;          
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 20px;
@@ -321,6 +340,7 @@
             }
         }
     </style>
+    
 </head>
 <body>
 
@@ -477,23 +497,33 @@
         
         <div class="features-grid">
             <div class="card">
-                <h3>Home Icon: Home View: Daily Discovery</h3>
+                <h3><span class="material-symbols-outlined">
+home
+</span>Home View: Daily Discovery</h3>
                 <p>Each day, users discover <strong>5 curated species</strong> through engaging "Did You Know?" cards that highlight fascinating biological facts and also sees latest science news.</p>
             </div>
             <div class="card">
-                <h3>Map Icon: Explore View: Local Biodiversity</h3>
+                <h3><span class="material-symbols-outlined">
+map
+</span>Explore View: Local Biodiversity</h3>
                 <p>Powered by <strong>iNaturalist's real-time observation data</strong>, users can locate and search for specific species within their immediate area.</p>
             </div>
             <div class="card">
-                <h3>Heart Icon: Favorites: Personal Collection</h3>
+                <h3><span class="material-symbols-outlined">
+favorite
+</span> Favorites View: Personal Collection</h3>
                 <p>Build a curated library of captivating species facts and local observations, creating a personalized reference for continued learning.</p>
             </div>
             <div class="card">
-                <h3>Game Controller Icon: Games: Adaptive Learning</h3>
+                <h3><span class="material-symbols-outlined">
+quiz
+</span> Quizzes View: Adaptive Learning</h3>
                 <p>Test knowledge through <strong>AI-generated daily quizzes</strong> tailored to saved favorites or, for new users, randomly selected species to broaden exposure.</p>
             </div>
             <div class="card">
-                <h3>Magnifying Glass Icon: Search: Intelligent Discovery</h3>
+                <h3><span class="material-symbols-outlined">
+search
+</span> Search View: Intelligent Discovery</h3>
                 <p>Look up any species for AI-generated insights and comprehensive <strong>GBIF database</strong> information. Use <strong>natural language queries</strong> like "endangered birds in California" for intuitive exploration.</p>
             </div>
         </div>
