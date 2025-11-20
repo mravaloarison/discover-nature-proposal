@@ -59,6 +59,18 @@
         .col-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
         .col-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
 
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .feature-centered {
+            grid-column: 1 / -1;
+            max-width: 50%;
+            margin: 0 auto;
+        }
+
         .card {
             background: #f9f9f9;
             padding: 20px;
@@ -275,6 +287,15 @@
             .col-3 {
                 grid-template-columns: 1fr;
             }
+
+            .features-grid {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .feature-centered {
+                max-width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -393,6 +414,39 @@
     </div>
 
     <div class="slide">
+        <h2>App Architecture & Features</h2>
+        <p>The app features five interconnected views designed to spark curiosity, encourage exploration, and reinforce learning through personalized experiences.</p>
+        
+        <div class="features-grid">
+            <div class="card">
+                <h3>🏠 Home View: Daily Discovery</h3>
+                <p>Each day, users discover <strong>5 curated species</strong> through engaging "Did You Know?" cards that highlight fascinating biological facts and also sees latest science news.</p>
+            </div>
+            <div class="card">
+                <h3>🗺️ Explore View: Local Biodiversity</h3>
+                <p>Powered by <strong>iNaturalist's real-time observation data</strong>, users can locate and search for specific species within their immediate area.</p>
+            </div>
+            <div class="card">
+                <h3>⭐ Favorites: Personal Collection</h3>
+                <p>Build a curated library of captivating species facts and local observations, creating a personalized reference for continued learning.</p>
+            </div>
+            <div class="card">
+                <h3>🎮 Games: Adaptive Learning</h3>
+                <p>Test knowledge through <strong>AI-generated daily quizzes</strong> tailored to saved favorites or, for new users, randomly selected species to broaden exposure.</p>
+            </div>
+            <div class="card">
+                <h3>🔍 Search: Intelligent Discovery</h3>
+                <p>Look up any species for AI-generated insights and comprehensive <strong>GBIF database</strong> information. Use <strong>natural language queries</strong> like "endangered birds in California" for intuitive exploration.</p>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <span>Discover Nature Presentation</span>
+            <span>Slide 5</span>
+        </div>
+    </div>
+
+    <div class="slide">
         <h2>Technical Feasibility</h2>
         <p>This plan is highly likely to succeed because it is not starting from zero. I already have a small MVP which I am currently working on.</p>
         
@@ -416,7 +470,7 @@
         </div>
         <div class="slide-footer">
             <span>Discover Nature Presentation</span>
-            <span>Slide 5</span>
+            <span>Slide 6</span>
         </div>
     </div>
 
