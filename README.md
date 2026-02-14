@@ -4,7 +4,7 @@ I started building Discover Nature as a more accessible version of iNaturalist f
 
 Most apps either focus on collecting data (like iNaturalist, Merlin, and eBird) or on gamified learning (like Kahoot!, Duolingo, and Quizlet). My goal is to bring both into one app so people learn, understand, and protect the ecosystems around them. 
 
-#### Comparison with Existing Platforms
+##### Comparison with Existing Platforms
 
 | Feature | Discover Nature | iNaturalist, eBird, Merlin | Duolingo, Kahoot!, Quizlet |
 |----------|------------------|---------------------------|----------------------------|
@@ -14,9 +14,7 @@ Most apps either focus on collecting data (like iNaturalist, Merlin, and eBird) 
 | Daily, personalized, and adaptive gamified education to build knowledge | ✓ | ✗ | ✓ |
 | Latest science News + daily science/species fun fact (Curated) | ✓ | ✗ | ✗ |
 
----
-
-#### App Architecture & Features
+##### App Architecture & Features
 
 The app features five interconnected views designed to spark curiosity, encourage exploration, and reinforce learning through personalized experiences.
 
@@ -40,13 +38,10 @@ Users can test their knowledge through AI-generated daily quizzes based on their
 
 The goal of this feature is to allow users to search for species using natural language. For example, a user could type: “I was in New York and saw a big bird, but I don’t know what it is.” The app then searches through bird species recorded in New York via iNaturalist to find the closest matches.
 
-#### Current Codebase
+##### Current Codebase
 
 - [iOS Repository](https://github.com/mravaloarison/nat-geo-ios-mvp)  
 - [Python API Repository](https://github.com/mravaloarison/nat-geo-api-mvp)
 
-### Mar – Apr 2026  
+##### Mar – Apr 2026  
 Beta Testing & Launch Prep
-
-Closed beta with 100–200 learners.  
-Fix bugs, refine AI, complete evaluation, and finalize MVP for launch.
